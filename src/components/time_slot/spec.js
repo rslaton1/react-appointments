@@ -10,7 +10,8 @@ describe('TimeSlot', () => {
 
   const props = {
     time: 9,
-    showModal: sinon.spy()
+    showModal: sinon.spy(),
+    available: true
   };
 
   it('renders', () => {
@@ -28,14 +29,30 @@ describe('TimeSlot', () => {
     expect(element).to.have.className('time-slot');
   });
 
-  it('does not have class time-slot-unavailable initially', () => {
+  it('does not have class time-slot-unavailable when available', () => {
     element = shallow(<TimeSlot {...props} />);
     expect(element).to.not.have.className('time-slot-unavailable');
   });
 
-  it('should dispatch an action to display modal when clicked', () => {
+  it('does has class time-slot-unavailable when unavailable', () => {
+    element = shallow(<TimeSlot {...props} />);
+    expect(element).to.not.have.className('time-slot-unavailable');
+
+    props.available = false;
+
+    element = shallow(<TimeSlot {...props} />);
+    expect(element).to.have.className('time-slot-unavailable');
+  });
+
+  it('should dispatch an action to display modal on click', () => {
     element = shallow(<TimeSlot {...props} />);
     element.simulate('click');
+    expect(props.showModal).to.have.been.called;
+  });
+
+  it('should dispatch an action to display modal on key down', () => {
+    element = shallow(<TimeSlot {...props} />);
+    element.simulate('keyDown', { key: 'Return' });
     expect(props.showModal).to.have.been.called;
   });
 });

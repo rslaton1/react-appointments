@@ -1,5 +1,8 @@
-import { showModal } from './modal';
+import { showModal, hideModal } from './modal';
+import { saveTimeSlot } from './time_slot';
 
 export {
-  showModal
+  showModal,
+  hideModal,
+  saveTimeSlot
 };

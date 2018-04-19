@@ -8,8 +8,11 @@ import { Provider } from 'react-redux';
 
 import configureStore from './stores/configure_store';
 import App from './components/app';
+import ReactModal from 'react-modal';
 
 require('../styles/index.scss');
+
+ReactModal.setAppElement('#app');
 
 const store = configureStore();
 
