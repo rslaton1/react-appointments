@@ -5,11 +5,13 @@ import chaiAsPromised from 'chai-as-promised';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { JSDOM } from 'jsdom';
+import chaiEnzyme from 'chai-enzyme';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
+chai.use(chaiEnzyme());
 
 global.document = new JSDOM('');
 global.window = document.defaultView;
