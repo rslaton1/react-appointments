@@ -13,8 +13,9 @@ chai.use(sinonChai);
 chai.use(chaiAsPromised);
 chai.use(chaiEnzyme());
 
-global.document = new JSDOM('');
-global.window = document.defaultView;
+const dom = new JSDOM('').window;
+global.window = dom.window;
+global.document = dom.window.document;
 global.navigator = { userAgent: 'browser' };
 
 global.React = React;
