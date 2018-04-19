@@ -21,7 +21,7 @@ describe('TimeSlot', () => {
 
   it('displays the time', () => {
     element = shallow(<TimeSlot { ...props } />);
-    expect(element.find('span')).to.contain.text('9AM');
+    expect(element.find('.display-time')).to.contain.text('9AM');
   });
 
   it('has the class time-slot', () => {

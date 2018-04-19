@@ -30,20 +30,32 @@ export default class ContactModal extends Component {
     this.props.hideModal();
   }
 
+  afterOpenModal() {
+    const { timeSlot: { name, phone } } = this.props;
+    this.setState({ name, phone });
+  }
+
   render() {
-    const { modal: { shouldDisplayModal }, timeSlot } = this.props;
+    const { modal: { shouldDisplayModal } } = this.props;
     return (
       <ReactModal
         isOpen={shouldDisplayModal}
+        onAfterOpen={() => this.afterOpenModal()}
         onRequestClose={() => this.hideModal()}
+        className="contact-modal"
       >
-        <form id="contactForm" onSubmit={(e) => this.handleSubmit(e)}>
+        <form
+          id="contactForm"
+          className="contact-form"
+          onSubmit={(e) => this.handleSubmit(e)}
+        >
+          <h2 className="contact-modal-heading">Enter your contact info</h2>
           <input
             id="name"
             type="text"
             name="name"
             placeholder="Your name"
-            value={this.state.name || timeSlot.name}
+            value={this.state.name}
             onChange={e => this.handleChange(e)}
           />
           <input
@@ -51,10 +63,10 @@ export default class ContactModal extends Component {
             type="tel"
             name="phone"
             placeholder="Your phone number"
-            value={this.state.phone || timeSlot.phone}
+            value={this.state.phone}
             onChange={e => this.handleChange(e)}
           />
-          <button id="submitContactForm" action="submit">Submit</button>
+          <button id="submitContactForm" className="submit-button" action="submit">Submit</button>
         </form>
       </ReactModal>
     );

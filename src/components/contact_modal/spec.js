@@ -71,6 +71,16 @@ describe('ContactModal', () => {
     expect(props.hideModal).to.have.been.called;
   });
 
+  it('should set componenet state to saved time slot on open', () => {
+    props.timeSlot = { id: 9, name: 'Carl', phone: '111-111-1111' };
+
+    element = shallow(<ContactModal {...props} />);
+    element.find(ReactModal).prop('onAfterOpen')();
+  
+    expect(element).to.have.state('name', 'Carl');
+    expect(element).to.have.state('phone', '111-111-1111');
+  });
+
   it('should reset componenet state on close', () => {
     element = shallow(<ContactModal {...props} />);
 

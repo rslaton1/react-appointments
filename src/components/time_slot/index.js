@@ -21,7 +21,7 @@ export default class TimeSlot extends Component {
         onKeyDown={() => showModal(time)}
         tabIndex={0}
       >
-        <span>{displayTime}</span>
+        <div className="display-time">{displayTime}</div>
       </div>
     );
   }
